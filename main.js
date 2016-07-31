@@ -23,7 +23,7 @@ app.on('ready', function() {
         resizable: true,
         titleBarStyle: 'hidden',
         frame: false,
-        icon: __dirname + '/icon.icns'
+        icon: __dirname + '/icon.png'
     });
 
     // and load the index.html of the app.
