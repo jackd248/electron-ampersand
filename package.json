@@ -10,6 +10,14 @@
     "pack-linux": "electron-packager . --asar --asar-unpack=protocol-link.html --overwrite --platform=linux --arch=x64 --icon=assets/app-icon/png/64.png --prune=true --out=out",
     "package": "npm run pack-mac && npm run pack-win && npm run pack-linux"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackd248/ampersand.git",
+    "docs": "https://github.com/jackd248/ampersand/blob/master/README.md"
+  },
+  "bugs": {
+    "url": "https://github.com/jackd248/ampersand/issues"
+  },
   "keywords": [
     "electron",
     "markdown",
