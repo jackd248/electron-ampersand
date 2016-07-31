@@ -1,0 +1,39 @@
+{
+  "name": "ampersand",
+  "version": "0.1.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --debug",
+    "pack-mac": "electron-packager . --asar --asar-unpack=protocol-link.html --overwrite --platform=darwin --arch=x64 --icon=assets/app-icon/mac/app.icns --prune=true --out=out --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
+    "pack-win": "electron-packager . ElectronAPIDemos --asar --asar-unpack=protocol-link.html --overwrite --platform=win32 --arch=ia32 --icon=assets/app-icon/win/app.ico --prune=true --out=out --version-string.CompanyName='GitHub, Inc.' --version-string.FileDescription='Electron API Demos' --version-string.ProductName='Electron API Demos'",
+    "pack-linux": "electron-packager . --asar --asar-unpack=protocol-link.html --overwrite --platform=linux --arch=x64 --icon=assets/app-icon/png/64.png --prune=true --out=out",
+    "package": "npm run pack-mac && npm run pack-win && npm run pack-linux"
+  },
+  "keywords": [
+    "electron",
+    "markdown",
+    "editor",
+    "minimal",
+    "preview",
+    "html",
+    "pdf"
+  ],
+  "author": "Konrad Michalik <hello@konradmichalik.eu>",
+  "license": "MIT",
+  "dependencies": {
+    "codemirror": "^5.17.0",
+    "electron-json-storage": "^2.0.0",
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "jquery": "^3.1.0",
+    "markdown": "^0.5.0",
+    "requirejs": "^2.2.0",
+    "json-storage": "^2.1.1",
+    "localStorage": "^1.0.3"
+  }
+}

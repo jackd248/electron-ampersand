@@ -1,0 +1,36 @@
+.cm-s-ampersand.CodeMirror { background: #272822; color: #f8f8f2; }
+.cm-s-ampersand div.CodeMirror-selected { background: #5a7898; color: #ffffff;}
+.cm-s-ampersand .CodeMirror-line::selection, .cm-s-ampersand .CodeMirror-line > span::selection, .cm-s-ampersand .CodeMirror-line > span > span::selection { background: #5a7898; color: #ffffff;}
+.cm-s-ampersand .CodeMirror-line::-moz-selection, .cm-s-ampersand .CodeMirror-line > span::-moz-selection, .cm-s-ampersand .CodeMirror-line > span > span::-moz-selection { background: #5a7898; color: #ffffff;}
+.cm-s-ampersand .CodeMirror-gutters { background: #272822; border-right: 0px; }
+.cm-s-ampersand .CodeMirror-guttermarker { color: white; }
+.cm-s-ampersand .CodeMirror-guttermarker-subtle { color: #d0d0d0; }
+.cm-s-ampersand .CodeMirror-linenumber { color: #d0d0d0; }
+.cm-s-ampersand .CodeMirror-cursor { border-left: 1px solid #f8f8f0; }
+
+.cm-s-ampersand span.cm-comment { color: #75715e; }
+.cm-s-ampersand span.cm-atom { color: #ae81ff; }
+.cm-s-ampersand span.cm-number { color: #ae81ff; }
+
+.cm-s-ampersand span.cm-property, .cm-s-ampersand span.cm-attribute { color: #a6e22e; }
+.cm-s-ampersand span.cm-keyword { color: #f92672; }
+.cm-s-ampersand span.cm-builtin { color: #5a7898; }
+.cm-s-ampersand span.cm-string { color: #656565; }
+
+.cm-s-ampersand span.cm-variable { color: #f8f8f2; }
+.cm-s-ampersand span.cm-variable-2 { color: #5a7898; }
+.cm-s-ampersand span.cm-variable-3 { color: #5a7898; }
+.cm-s-ampersand span.cm-def { color: #fd971f; }
+.cm-s-ampersand span.cm-bracket { color: #f8f8f2; }
+.cm-s-ampersand span.cm-tag { color: #f92672; }
+.cm-s-ampersand span.cm-header { color: #a0a383; }
+.cm-s-ampersand span.cm-link { color: #5a7898; }
+.cm-s-ampersand span.cm-error { background: #f92672; color: #f8f8f0; }
+.cm-s-ampersand span.cm-em { color: #a8513b; }
+.cm-s-ampersand span.cm-strong { color: #a8513b; }
+
+.cm-s-ampersand .CodeMirror-activeline-background { background: #373831; }
+.cm-s-ampersand .CodeMirror-matchingbracket {
+    text-decoration: underline;
+    color: white !important;
+}

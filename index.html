@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ampersand</title>
+
+    <link rel="stylesheet" type="text/css" href="css/ampersand.css">
+</head>
+<body>
+    <div class="container wrapper">
+        <div class="row main">
+            <div class="col-6 editor no-margin">
+                <div class="header">
+                    <span class="filename"></span><span class="save-indicator green hidden">*</span>
+                </div>
+                <div class="content">
+                    <textarea class="codemirror-textarea" id="codemirror"></textarea>
+                </div>
+                <div class="footer">
+                    <a class="toggle-menu">+</a>
+                    <a class="toggle-preview">&raquo;</a>
+                    <div class="word-count">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 preview no-margin">
+                <div class="content">
+                    <div class="header">
+
+                    </div>
+                    <div id="html">
+
+                    </div>
+                    <div class="footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row settings hidden">
+            <div class="col-3 menu no-margin">
+                <div class="content">
+                    <ul>
+                        <li>
+                            <a class="new-file" onclick="newFile(); hideMenu();"><span class="green">New</span> File</a>
+                        </li>
+                        <li>
+                            <a class="open-file" onclick="open(); hideMenu();"><span class="green">Open</span> File</a>
+                        </li>
+                        <li>
+                            <a class="save-file" onclick="save(); hideMenu();"><span class="green">Save</span> File</a>
+                        </li>
+                        <li>
+                            <a class="save-as-file" onclick="saveAs(); hideMenu();"><span class="green">Save</span> File <span class="blue">as</span></a>
+                        </li>
+                        <li>
+                            <a onclick="saveHtml(); hideMenu();"><span class="blue">Export</span> File to <span class="red">HTML</span></a>
+                        </li>
+                        <li>
+                            <a><span class="blue">Export</span> File to <span class="red">PDF</span></a>
+                        </li>
+                        <li>
+                            <a class="toggle-menu"><span class="red">Close</span> Menu</a>
+                        </li>
+                        <li>
+                            Recent Files:
+                            <ul class="recent-files">
+                                <li>
+                                    <a>README.md</a>
+                                </li>
+                                <li>
+                                    <a>notes.md</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="footer">
+                        <a class="toggle-menu">+</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9 options no-margin">
+                <div class="content">
+                    <div class="row">
+                        <div class="six columns">
+                            <h2>
+                                Settings
+                            </h2>
+                            ToDo:
+                            <ul>
+                                <li>
+                                    Style switch
+                                </li>
+                                <li>
+                                    Enable/Disable Auto Save
+                                </li>
+                                <li>
+                                    Enable/Disable Word Count
+                                </li>
+                                <li>
+                                    Enable/Disable Syntax Helper
+                                </li>
+                                <li>
+                                    Shortcuts
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="six columns">
+                            <h2>
+                                About
+                            </h2>
+                            Thanks.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="info">
+
+    </div>
+    <script src="js/libs/jquery.min.js"></script>
+    <script src="js/libs/codemirror.js"></script>
+    <script src="js/libs/clike.js"></script>
+    <script src="js/libs/css.js"></script>
+    <script src="js/libs/gfm.js"></script>
+    <script src="js/libs/htmlmixed.js"></script>
+    <script src="js/libs/javascript.js"></script>
+    <script src="js/libs/markdown.js"></script>
+    <script src="js/libs/meta.js"></script>
+    <script src="js/libs/overlay.js"></script>
+    <script src="js/libs/search.js"></script>
+    <script src="js/libs/searchcursor.js"></script>
+    <script src="js/libs/xml.js"></script>
+    <script src="js/markdown/markdown.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/format.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/fo.js"></script>
+</body>
+</html>

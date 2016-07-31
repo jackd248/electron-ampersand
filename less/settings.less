@@ -1,0 +1,95 @@
+/*
+ * BASIC
+ */
+.columns.three {
+  width: 25%;
+}
+.columns.nine {
+  width: 75%;
+}
+span.red {
+  color: @red;
+}
+span.blue {
+  color: @lightBlue;
+}
+span.green {
+  color: @lightGreen;
+}
+
+/*
+ * MENU
+ */
+.menu {
+  height: 100%;
+  min-height: 720px;
+  background-color: @gray;
+  color: @lightGray;
+  font-family: Hack, monospace;
+  border: none;
+  border-radius: 0px;
+
+  .footer {
+    width: 25%;
+    left: 0;
+    text-align: left;
+
+    .toggle-menu {
+      float: left;
+      -ms-transform: rotate(45deg); /* IE 9 */
+      -webkit-transform: rotate(45deg); /* Safari */
+      transform: rotate(45deg);
+    }
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      border-bottom: 1px solid @darkGray;
+      padding: 10px 0px;
+      color: @darkGray;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      a {
+        color: @lightGray;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      ul {
+        margin-left: 10px;
+
+        li {
+          border-bottom: none;
+          font-style: italic;
+          padding: 5px 0;
+
+          a {
+            color: @darkGray;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+ * OPTIONS
+ */
+.options {
+  height: 100%;
+  min-height: 720px;
+  background-color: @lightWhite;
+  color: @gray;
+  font-family: Aleo, sans-serif;
+
+  h2 {
+    font-weight: bold;
+  }
+}
