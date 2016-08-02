@@ -1,5 +1,5 @@
 function saveHtml() {
-    options = {};
+    var options = {};
     if (store.get('filename')) {
         options.defaultPath = fileNameToHtml(store.get('filename'));
     }
@@ -21,7 +21,7 @@ function saveHtml() {
 }
 
 function saveAs() {
-    options = {};
+    var options = {};
     if (store.get('filename')) {
         options.defaultPath = store.get('filename');
     }
@@ -141,6 +141,26 @@ ipc.on('file-save', save);
 ipc.on('file-save-as', saveAs);
 
 ipc.on('file-open', open);
+
+ipc.on('print', print);
+
+ipc.on('export-as-html', saveHtml);
+
+ipc.on('export-as-pdf', saveHtml);
+
+ipc.on('toggle-preview', togglePreview);
+
+ipc.on('dark-theme', showDarkTheme);
+
+ipc.on('light-theme', showLightTheme);
+
+ipc.on('split-theme', showSplitTheme);
+
+ipc.on('zoom-in', fontBigger);
+
+ipc.on('zoom-out', fontSmaller);
+
+ipc.on('toggle-menu', toggleMenu);
 
 ipc.on('ctrl+b', function() {
     toggleFormat('bold');

@@ -1,3 +1,5 @@
+var Menu = require('electron');
+var menu = new Menu();
 var template = [
     {
         label: 'Markdown Editor',
@@ -109,5 +111,5 @@ var template = [
     }
 ];
 
-var menu = Menu.buildFromTemplate(template);
+menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);

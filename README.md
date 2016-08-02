@@ -1,12 +1,12 @@
 # Ampersand
 
-![ampersand logo](logo.png)
+![ampersand logo](media/logo.png)
 
 __Note: Ampersand is WIP and not close to something usable at the moment.__
 
 Ampersand is a _lightweight_ [markdown](https://daringfireball.net/projects/markdown/) editor for Windows, Mac & Linux focused on a minimal & clean interface for distraction-free writing.
 
-![ampersand screenshot](screenshot.png)
+![ampersand screenshot](media/screenshot.png)
 
 ## Credits
 

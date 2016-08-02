@@ -2,27 +2,31 @@
 
 var electron = require('electron');
 // Module to control application life.
-const {app, globalShortcut} = require('electron')
+const app = electron.app;
 // Module to create native browser window.
 var BrowserWindow = electron.BrowserWindow;
-//var globalShortcut = require('electron');
+
+const globalShortcut = electron.globalShortcut;
+const Menu = electron.Menu;
+const dialog = electron.dialog;
+var shell = require('shell');
 
 const Config = require('./package.json');
 
+// const Config = require('./package.json');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is GCed.
 let mainWindow;
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-app.on('ready', function() {
+
+function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 1280,
         height: 720,
         resizable: true,
         titleBarStyle: 'hidden',
-        frame: false,
+        //frame: false,
         icon: __dirname + '/icon.png'
     });
 
@@ -30,7 +34,7 @@ app.on('ready', function() {
     mainWindow.loadURL('file://' + __dirname + '/index.html');
 
     // Open the devtools.
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {
@@ -46,36 +50,150 @@ app.on('ready', function() {
         e.preventDefault();
         electron.shell.openExternal(url);
     });
-
-    // Regestering global shortcuts for formatting markdown
-    var focusedWindow = BrowserWindow.getFocusedWindow();
-    globalShortcut.register('CmdOrCtrl+b', function() {
-        focusedWindow.webContents.send('ctrl+b');
-    });
-
-    globalShortcut.register('CmdOrCtrl+i', function() {
-        focusedWindow.webContents.send('ctrl+i');
-    });
-
-    globalShortcut.register('CmdOrCtrl+/', function() {
-        focusedWindow.webContents.send('ctrl+/');
-    });
-
-    globalShortcut.register('CmdOrCtrl+l', function() {
-        focusedWindow.webContents.send('ctrl+l');
-    });
-
-    globalShortcut.register('CmdOrCtrl+h', function() {
-        focusedWindow.webContents.send('ctrl+h');
-    });
-
-    globalShortcut.register('CmdOrCtrl+Alt+i', function() {
-        focusedWindow.webContents.send('ctrl+alt+i');
-    });
-
-    globalShortcut.register('CmdOrCtrl+Shift+t', function() {
-        focusedWindow.webContents.send('ctrl+shift+t');
-    });
+}
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+app.on('ready', function() {
+    createWindow();
+    const menu = Menu.buildFromTemplate(menuTemplate);
+    Menu.setApplicationMenu(menu);
 });
+
+var menuTemplate = [
+    {
+        label: 'Markdown Editor',
+        submenu: [
+            {label: "About Ampersand", click: function () {
+                dialog.showMessageBox({title: "About Ampersand", type:"info", message: "A lightweight markdown editor. \nMIT Copyright (c) 2016 Konrad Michalik <hello@konradmichalik.eu>", buttons: ["Close"] });
+            }},
+            {type: "separator"},
+            {label: "Settings", accelerator: "CmdOrCtrl+U", click: function() {
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('toggle-menu');
+            }},
+            {
+                label: "Quit",
+                accelerator: "Command+Q",
+                selector: 'terminate:'
+            }
+        ]
+    },
+    {
+        label: "&File",
+        submenu: [
+            {label: "New", accelerator: "CmdOrCtrl+N", click: function() {
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('file-new');
+            }},
+            {label: "Open", accelerator: "CmdOrCtrl+O", click: function() {
+                let focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('file-open');
+            }},
+            {label: "Save", accelerator: "CmdOrCtrl+S", click: function() {
+                let focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('file-save');
+            }},
+            {label: "Save As", accelerator: "CmdOrCtrl+Shift+S", click: function() {
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('file-save-as');
+            }},
+            {type: "separator"},
+            {label: "Print", accelerator: "CmdOrCtrl+P", click: function() {
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('print');
+            }},
+            {label: "Export as HTML", accelerator: "CmdOrCtrl+H", click: function() {
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('export-as-html');
+            }},
+            {label: "Export as PDF", accelerator: "CmdOrCtrl+G", click: function() {
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('export-as-pdf');
+            }}
+        ]
+    },
+    {
+        label: "&Edit",
+        submenu: [
+            {label: "Undo", accelerator: "CmdOrCtrl+Z", role: "undo"},
+            {label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", role: "redo"},
+            {type: "separator"},
+            {label: "Cut", accelerator: "CmdOrCtrl+X", role: "cut"},
+            {label: "Copy", accelerator: "CmdOrCtrl+C", role: "copy"},
+            {label: "Paste", accelerator: "CmdOrCtrl+V", role: "paste"},
+            {label: "Select All", accelerator: "CmdOrCtrl+A", role: 'selectall'},
+            {type: "separator"},
+            {label: "Search", accelerator: "CmdOrCtrl+F", click: function() {
+                let focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('ctrl+f');
+            }},
+            {label: "Replace", accelerator: "CmdOrCtrl+Shift+F", click: function() {
+                let focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('ctrl+shift+f');
+            }}
+        ]
+    },
+    {
+        label: "&View",
+        submenu: [
+            {label: "Toggle Full Screen", accelerator:"F11", click: function(){
+                let focusedWindow = BrowserWindow.getFocusedWindow();
+                let isFullScreen = focusedWindow.isFullScreen();
+                focusedWindow.setFullScreen(!isFullScreen);
+            }},
+            {
+                label: 'Reload',
+                accelerator: 'CmdOrCtrl+R',
+                click (item, focusedWindow) {
+                    if (focusedWindow) focusedWindow.reload()
+                }
+            },
+            {
+                label: 'Toggle Developer Tools',
+                accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+                click (item, focusedWindow) {
+                    if (focusedWindow) focusedWindow.webContents.toggleDevTools()
+                }
+            },
+            {type: "separator"},
+            {label: "Toggle Preview", accelerator:"CmdOrCtrl+0", click: function(){
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('toggle-preview');
+            }},
+            {label: "Show Dark Theme", accelerator:"CmdOrCtrl+1", click: function(){
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('dark-theme');
+            }},
+            {label: "Show Light Theme", accelerator:"CmdOrCtrl+2", click: function(){
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('light-theme');
+            }},
+            {label: "Show Split Theme", accelerator:"CmdOrCtrl+3", click: function(){
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('split-theme');
+            }},
+            {type: "separator"},
+            {label: "Zoom out", accelerator:"CmdOrCtrl+-", click: function(){
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('zoom-out');
+            }},
+            {label: "Zoom in", accelerator:"CmdOrCtrl+Plus", click: function(){
+                var focusedWindow = BrowserWindow.getFocusedWindow();
+                focusedWindow.webContents.send('zoom-in');
+            }}
+        ]
+    },
+    {
+        label: "&Help",
+        submenu: [
+            {label: "Documentation", click: function () {
+                shell.openExternal(Config.repository.docs);
+            }},
+            {label: "Report Issue", click: function () {
+                shell.openExternal(Config.bugs.url);
+            }}
+        ]
+    }
+];
 
 

@@ -1,12 +1,11 @@
 /**
  * Created by konradmichalik on 26.07.16.
  */
-const {remote} = require('electron');
+var remote = require('electron').remote;
+var fs = remote.require('fs');
 var ipc = require('electron').ipcRenderer;
 var dialog = require('electron').remote.dialog;
-var fs = remote.require('fs');
-const {Menu, MenuItem} = remote;
-const BrowserWindow = remote.BrowserWindow;
+var BrowserWindow = remote.BrowserWindow;
 var localStorage = require('localStorage');
 var JsonStorage = require('json-storage').JsonStorage;
 var store = JsonStorage.create(localStorage, 'markdown-ampersand', { stringify: true });
@@ -23,6 +22,25 @@ var editor = CodeMirror.fromTextArea(code, {
     lineWrapping: true,
     matchBrackets: true
 });
+
+
+// `remote.require` since `Menu` is a main-process module.
+var buildEditorContextMenu = remote.require('electron-editor-context-menu');
+
+window.addEventListener('contextmenu', function(e) {
+    // Only show the context menu in text editors.
+    if (!e.target.closest('textarea, input, [contenteditable="true"],section')) return;
+
+    var menu = buildEditorContextMenu();
+
+    // The 'contextmenu' event is emitted after 'selectionchange' has fired but possibly before the
+    // visible selection has changed. Try to wait to show the menu until after that, otherwise the
+    // visible selection will update after the menu dismisses and look weird.
+    setTimeout(function() {
+        menu.popup(remote.getCurrentWindow());
+    }, 30);
+});
+
 
 window.onload = function ()
 {
