@@ -8,6 +8,24 @@ Ampersand is a _lightweight_ [markdown](https://daringfireball.net/projects/mark
 
 ![ampersand screenshot](media/screenshot.png)
 
+## Features
+
+* Live Preview
+* Github Flavored Markdown
+* Dark/Light/Split Mode
+* Full screen mode
+* Export as html
+
+## Build
+
+1. Clone repo ```git clone https://github.com/jackd248/ampersand.git```
+2. Change to repo ```cd ampersand```
+3. ```npm install && npm start```
+
+## Download
+
+*ToDo*
+
 ## Credits
 
 This application uses code from several open source projects:
@@ -15,4 +33,8 @@ This application uses code from several open source projects:
 * [Electron](http://electron.atom.io/)
 * [CodeMirror](http://codemirror.net/)
 * [Markdown-JS](https://github.com/evilstreak/markdown-js)
-    
+* [Hack Typeface](https://github.com/chrissimpkins/Hack)
+
+## License
+
+Copyright (c) 2016 Konrad Michalik, This software is licensed under the [MIT License](LICENSE).
