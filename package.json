@@ -1,5 +1,5 @@
 {
-  "name": "ampersand",
+  "name": "electron-ampersand",
   "productName": "Ampersand",
   "version": "0.2.0",
   "electronVersion": "0.36.12",
@@ -21,11 +21,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jackd248/ampersand.git",
-    "docs": "https://github.com/jackd248/ampersand/blob/master/README.md"
+    "url": "git+https://github.com/jackd248/electron-ampersand.git",
+    "docs": "https://github.com/jackd248/electron-ampersand/blob/master/README.md"
   },
   "bugs": {
-    "url": "https://github.com/jackd248/ampersand/issues"
+    "url": "https://github.com/jackd248/electron-ampersand/issues"
   },
   "keywords": [
     "electron",
