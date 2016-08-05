@@ -24,7 +24,7 @@ Ampersand is a _lightweight_ [markdown](https://daringfireball.net/projects/mark
 
 ## Download
 
-*ToDo*
+You can [download](https://github.com/jackd248/ampersand/releases) the latest stable version of Ampersand for Windows, Mac OS and Linux. 
 
 ## Credits
 
