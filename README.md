@@ -18,13 +18,13 @@ Ampersand is a _lightweight_ [markdown](https://daringfireball.net/projects/mark
 
 ## Build
 
-1. Clone repo ```git clone https://github.com/jackd248/ampersand.git```
-2. Change to repo ```cd ampersand```
+1. Clone repo ```git clone https://github.com/jackd248/electron-ampersand.git```
+2. Change to repo ```cd electron-ampersand```
 3. ```npm install && npm start```
 
 ## Download
 
-You can [download](https://github.com/jackd248/ampersand/releases) the latest stable version of Ampersand for Windows, Mac OS and Linux. 
+You can [download](https://github.com/jackd248/electron-ampersand/releases) the latest stable version of Ampersand for Windows, Mac OS and Linux. 
 
 ## Credits
 
