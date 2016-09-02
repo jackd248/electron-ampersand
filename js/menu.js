@@ -77,21 +77,14 @@ var template = [
             {label: "Toggle Preview", accelerator:"CmdOrCtrl+0", click: function(){
                 togglePreview();
             }},
-            {label: "Show Dark Theme", accelerator:"CmdOrCtrl+1", click: function(){
+            {label: "Dark Theme", accelerator:"CmdOrCtrl+1", click: function(){
                 showDarkTheme();
             }},
-            {label: "Show Light Theme", accelerator:"CmdOrCtrl+2", click: function(){
+            {label: "Light Theme", accelerator:"CmdOrCtrl+2", click: function(){
                 showLightTheme();
             }},
-            {label: "Show Split Theme", accelerator:"CmdOrCtrl+3", click: function(){
+            {label: "Split Theme", accelerator:"CmdOrCtrl+3", click: function(){
                 showSplitTheme();
-            }},
-            {type: "separator"},
-            {label: "Zoom out", accelerator:"CmdOrCtrl+-", click: function(){
-                fontSmaller();
-            }},
-            {label: "Zoom in", accelerator:"CmdOrCtrl+Plus", click: function(){
-                fontBigger();
             }}
         ]
     },
