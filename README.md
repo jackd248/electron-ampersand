@@ -11,6 +11,7 @@ Ampersand
 <p align="center">
   <a href="https://github.com/jackd248/electron-ampersand/releases"><img src="https://img.shields.io/github/release/jackd248/electron-ampersand.svg" alt="Release"></a>
   <a href="https://github.com/jackd248/electron-ampersand/releases"><img src="https://img.shields.io/github/downloads/jackd248/electron-ampersand/total.svg" alt="Downloads"></a>
+  <a href="https://travis-ci.org/jackd248/electron-ampersand"><img src="https://travis-ci.org/jackd248/electron-ampersand.svg?branch=master" alt="Build"/></a>
   <a href="https://david-dm.org/jackd248/electron-ampersand"><img src="https://david-dm.org/jackd248/electron-ampersand/status.svg" alt="Dependency status"></a>
   <a href="https://david-dm.org/vesparny/jackd248/electron-ampersand#info=devDependencies"><img src="https://david-dm.org/jackd248/electron-ampersand/dev-status.svg" alt="Dev dependency status"></a>
 </p>
