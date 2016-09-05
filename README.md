@@ -5,7 +5,6 @@ Ampersand
 <br/>
 <br/>
 </h1>
-<hr/>
 
 <h4 align="center">A markdown editor.</h4>
 
