@@ -124,10 +124,11 @@ function openFile(fileName) {
 
 function newFile() {
     store.set('filename', null);
-    this.currentFile = '';
-    clearContent();
+    this.currentFile = 'untitled.md';
     this.savedContent = '';
-    editor.getDoc().setValue('');
+    newCodeMirrorInstance();
+    markdownToHtml('');
+    editor.focus();
     updateWindowTitle('untitled.md');
     showSaveIndicator();
     showRecentFiles();
@@ -156,9 +157,11 @@ ipc.on('light-theme', showLightTheme);
 
 ipc.on('split-theme', showSplitTheme);
 
-ipc.on('zoom-in', fontBigger);
+ipc.on('toggle-line-numbers', toggleLineNumbers);
 
-ipc.on('zoom-out', fontSmaller);
+// ipc.on('zoom-in', fontBigger);
+//
+// ipc.on('zoom-out', fontSmaller);
 
 ipc.on('toggle-menu', toggleMenu);
 

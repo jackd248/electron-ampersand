@@ -9,11 +9,9 @@ var BrowserWindow = electron.BrowserWindow;
 const globalShortcut = electron.globalShortcut;
 const Menu = electron.Menu;
 const dialog = electron.dialog;
-var shell = require('shell');
 
 const Config = require('./package.json');
 
-// const Config = require('./package.json');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is GCed.
 let mainWindow;
@@ -160,26 +158,22 @@ var menuTemplate = [
                 var focusedWindow = BrowserWindow.getFocusedWindow();
                 focusedWindow.webContents.send('toggle-preview');
             }},
-            {label: "Show Dark Theme", accelerator:"CmdOrCtrl+1", click: function(){
+            {label: "Dark Theme", accelerator:"CmdOrCtrl+1", click: function(){
                 var focusedWindow = BrowserWindow.getFocusedWindow();
                 focusedWindow.webContents.send('dark-theme');
             }},
-            {label: "Show Light Theme", accelerator:"CmdOrCtrl+2", click: function(){
+            {label: "Light Theme", accelerator:"CmdOrCtrl+2", click: function(){
                 var focusedWindow = BrowserWindow.getFocusedWindow();
                 focusedWindow.webContents.send('light-theme');
             }},
-            {label: "Show Split Theme", accelerator:"CmdOrCtrl+3", click: function(){
+            {label: "Split Theme", accelerator:"CmdOrCtrl+3", click: function(){
                 var focusedWindow = BrowserWindow.getFocusedWindow();
                 focusedWindow.webContents.send('split-theme');
             }},
             {type: "separator"},
-            {label: "Zoom out", accelerator:"CmdOrCtrl+-", click: function(){
+            {label: "Toggle Line Numbers", click: function(){
                 var focusedWindow = BrowserWindow.getFocusedWindow();
-                focusedWindow.webContents.send('zoom-out');
-            }},
-            {label: "Zoom in", accelerator:"CmdOrCtrl+Plus", click: function(){
-                var focusedWindow = BrowserWindow.getFocusedWindow();
-                focusedWindow.webContents.send('zoom-in');
+                focusedWindow.webContents.send('toggle-line-numbers');
             }}
         ]
     },
@@ -187,10 +181,10 @@ var menuTemplate = [
         label: "&Help",
         submenu: [
             {label: "Documentation", click: function () {
-                shell.openExternal(Config.repository.docs);
+                electron.shell.openExternal(Config.repository.docs);
             }},
             {label: "Report Issue", click: function () {
-                shell.openExternal(Config.bugs.url);
+                electron.shell.openExternal(Config.bugs.url);
             }}
         ]
     }

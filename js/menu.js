@@ -4,7 +4,7 @@ var template = [
     {
         label: 'Markdown Editor',
         submenu: [
-            {label: "Settings", accelerator: "CmdOrCtrl+U", click: function() {
+            {label: "Settings", accelerator: "CmdOrCtrl+M", click: function() {
                 toggleMenu();
             }},
             {
@@ -85,6 +85,9 @@ var template = [
             }},
             {label: "Split Theme", accelerator:"CmdOrCtrl+3", click: function(){
                 showSplitTheme();
+            }},
+            {label: "Toggle Line Numbers", click: function(){
+                toggleLineNumbers();
             }}
         ]
     },
@@ -98,7 +101,7 @@ var template = [
                 shell.openExternal(Config.bugs.url);
             }},
             {label: "About Ampersand", click: function () {
-                dialog.showMessageBox({title: "About Ampersand", type:"info", message: "A lightweight markdown editor. \nMIT Copyright (c) 2016 Konrad Michalik <hello@konradmichalik.eu>", buttons: ["Close"] });
+                dialog.showMessageBox({title: "About Ampersand", type:"info", message: "A lightweight markdown editor. \n\nMIT Copyright (c) 2016 Konrad Michalik <hello@konradmichalik.eu>", buttons: ["Close"] });
             }}
         ]
     }

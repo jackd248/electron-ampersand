@@ -18,25 +18,34 @@ function resize() {
         ed.style.height = pre.clientHeight + 'px';
     }
 }
+function clearContent() {
+    document.querySelector('.preview').innerHTML = '';
+}
 
 function togglePreview() {
     document.querySelector('.preview').classList.toggle('offscreen');
     document.querySelector('.editor').classList.toggle('fullscreen');
     document.querySelector('.toggle-preview').classList.toggle('active');
+    setOption('preview',document.querySelector('.editor').classList.contains('fullscreen'));
+    editor.refresh();
 }
 
 function toggleMenu() {
-    document.querySelector('.settings').classList.toggle('hidden');
-    document.querySelector('.main').classList.toggle('hidden');
+    document.querySelector('.menu').classList.toggle('hidden');
+    if (!document.querySelector('.menu').classList.contains('hidden')) {
+        document.querySelector('.menu ul li a:first-child').focus();
+    }
 }
 
 function hideMenu() {
-    document.querySelector('.settings').classList.remove('hidden');
-    document.querySelector('.settings').classList.add('hidden');
-    document.querySelector('.main').classList.remove('hidden');
+    document.querySelector('.menu').classList.remove('hidden');
+    document.querySelector('.menu').classList.add('hidden');
 }
 
 function wordCount(str) {
+    if (str == null) {
+        return 0;
+    }
     return str.split(" ").length;
 }
 
@@ -64,29 +73,39 @@ function fileNameToHtml(filename) {
     return parts[0] + '.html';
 }
 
-function clearContent() {
-    document.querySelector('.editor .content').innerHTML = '';
-}
-
 function showDarkTheme() {
     clearTheme();
     document.querySelector('.preview').classList.toggle('dark');
+    document.querySelector('.menu').classList.remove('light');
+    document.querySelector('.info').classList.remove('light');
+    editor.setOption('theme','ampersand');
+    setOption('theme','dark');
 }
 
 function showLightTheme() {
     clearTheme();
     document.querySelector('.editor').classList.toggle('light');
+    document.querySelector('.menu').classList.toggle('light');
+    document.querySelector('.info').classList.toggle('light');
+    editor.setOption('theme','ampersand-light');
+    setOption('theme','light');
 }
 
 function showSplitTheme() {
+    setOption('theme','split');
+    editor.setOption('theme','ampersand');
     clearTheme();
 }
 
 function clearTheme() {
     var p = document.querySelector('.preview');
     var e = document.querySelector('.editor');
+    var m = document.querySelector('.menu');
+    var i = document.querySelector('.info');
     p.className=p.className.replace('dark','');
     e.className=e.className.replace('light','');
+    m.className=m.className.replace('light','');
+    i.className=i.className.replace('light','');
 }
 
 function addRecentFile(filename) {
@@ -94,10 +113,14 @@ function addRecentFile(filename) {
     if (!(array.indexOf(filename) != -1)) {
         array.unshift(filename);
     }
-    if (array.length > 5) {
+    if (array.length > 3) {
         array.pop();
     }
     store.set('recentFiles', array);
+}
+
+function setOption(option, value) {
+    store.set(option, value);
 }
 
 function addToast(message, type) {
@@ -106,19 +129,21 @@ function addToast(message, type) {
     info.innerHTML = toast;
 }
 
+function toggleLineNumbers() {
+    if (editor.getOption("lineNumbers")) {
+        editor.setOption("lineNumbers", false);
+        setOption("lineNumbers", false);
+    } else {
+        editor.setOption("lineNumbers", true);
+        setOption("lineNumbers", true);
+    }
+}
+
 function print() {
     // printDivCSS = new String ('<link href="../css/primer.css" rel="stylesheet" type="text/css">')
     // window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById('html').innerHTML;
     // window.frames["print_frame"].window.focus();
     // window.frames["print_frame"].window.print();
-}
-
-function fontSmaller() {
-    document.querySelector('body').style.fontSize = '0.9em';
-}
-
-function fontBigger() {
-    document.querySelector('body').style.fontSize = '1.1em';
 }
 
 // Generations and clean state of CodeMirror
@@ -139,7 +164,7 @@ function newCodeMirrorInstance(value) {
     document.querySelector('.editor .content').innerHTML = '<textarea class="codemirror-textarea" id="codemirror"></textarea>';
     var code = document.getElementsByClassName("codemirror-textarea")[0];
     editor = CodeMirror.fromTextArea(code, {
-        lineNumbers : false,
+        lineNumbers : store.get("lineNumbers") ? store.get("lineNumbers") : false,
         mode:  "gfm",
         theme: "ampersand",
         lineWrapping: true,
@@ -149,8 +174,9 @@ function newCodeMirrorInstance(value) {
     editor.on("change", function() {
         markdownToHtml(editor.getValue());
     });
-
-    editor.getDoc().setValue(value);
+    if (value) {
+        editor.getDoc().setValue(value);
+    }
 }
 
 function showRecentFiles() {

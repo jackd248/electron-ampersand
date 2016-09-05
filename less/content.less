@@ -135,6 +135,10 @@ html, body
   }
 }
 
+.info.light .toast {
+  background-color: @lightWhite;
+}
+
 @-moz-keyframes toast {
   0% { opacity: 0; bottom: 20px;}
   5% { opacity: 1; bottom: 40px;}
@@ -262,7 +266,7 @@ html, body
   .header {
     right: 0;
     color: @darkGray;
-    background: linear-gradient(rgba(254,254,254,1), rgba(254,254,254,0.7), rgba(254,254,254,0));
+    background: linear-gradient(rgba(254,254,254,1), rgba(254,254,254,0.9), rgba(254,254,254,0));
   }
 
   .footer {
@@ -293,38 +297,9 @@ html, body
     }
   }
 
-  //h1 {
-  //  width: 100%;
-  //  font-weight: bold;
-  //  padding-bottom: 12px;
-  //  margin-bottom: 20px;
-  //  border-bottom: 1px solid lighten(@lightGray,20%);
-  //}
-  //
-  //h2 {
-  //  font-weight: bold;
-  //}
-  //
-  //p {
-  //  font-size: 16px;
-  //}
-  //
-  //blockquote {
-  //  color: @lightGray;
-  //  font-size: 16px;
-  //
-  //  &:before {
-  //    width: 20px;
-  //    height: 20px;
-  //    font-family: Arial, sans-serif;
-  //    position: absolute;
-  //    content: "”";
-  //    margin-left: -30px;
-  //    margin-top: -18px;
-  //    font-size: 60px;
-  //  }
-  //}
-  //
+  blockquote {
+    font-size: 14px;
+  }
   img {
     max-width: 100%;
   }

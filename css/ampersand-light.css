@@ -5,7 +5,7 @@
 .cm-s-ampersand .CodeMirror-gutters { background: #333333; border-right: 0px; }
 .cm-s-ampersand .CodeMirror-guttermarker { color: white; }
 .cm-s-ampersand .CodeMirror-guttermarker-subtle { color: #d0d0d0; }
-.cm-s-ampersand .CodeMirror-linenumber { color: #444444; }
+.cm-s-ampersand .CodeMirror-linenumber { color: #CCCCCC; }
 .cm-s-ampersand .CodeMirror-cursor { border-left: 1px solid #f8f8f0; }
 
 .cm-s-ampersand span.cm-comment { color: #75715e; }
