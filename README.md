@@ -6,7 +6,8 @@ Ampersand
 <br/>
 </h1>
 
-<h4 align="center">A markdown editor.</h4>
+<h4 align="center">Another markdown editor</h4>
+<h5 align="center"></h5>
 
 <p align="center">
   <a href="https://github.com/jackd248/electron-ampersand/releases"><img src="https://img.shields.io/github/release/jackd248/electron-ampersand.svg" alt="Release"></a>

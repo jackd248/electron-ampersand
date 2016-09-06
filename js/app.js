@@ -8,6 +8,8 @@ var dialog = require('electron').remote.dialog;
 var BrowserWindow = remote.BrowserWindow;
 var localStorage = require('localStorage');
 var JsonStorage = require('json-storage').JsonStorage;
+var $ = require('jquery');
+require('malihu-custom-scrollbar-plugin')($);
 var store = JsonStorage.create(localStorage, 'markdown-ampersand', { stringify: true });
 var md = require('markdown-it')({
     html:         true,        // Enable HTML tags in source
@@ -101,6 +103,58 @@ function loadEventListener() {
             hideMenu();
         }
     });
+
+    var prev = false;
+    var ed = false;
+
+    $(".preview").mCustomScrollbar({
+        theme:"minimal-dark",
+        // callbacks:{
+        //     onScrollStart: function(){
+        //         prev = true;
+        //     },
+        //     onScroll: function() {
+        //         setTimeout(function() {
+        //             prev = false;
+        //         }, 30);
+        //     },
+        //     whileScrolling:function(el){
+        //         if (!ed) {
+        //             $('.editor').mCustomScrollbar("scrollTo",this.mcs.top*-1,{
+        //                 scrollEasing:"linear",
+        //                 timeout: 10,
+        //                 scrollInertia: 200
+        //             });
+        //         }
+        //     }
+        // }
+    });
+
+    $(".editor").mCustomScrollbar({
+        theme:"minimal-dark",
+        callbacks:{
+            onScrollStart: function(){
+                ed = true;
+            },
+            onScroll: function() {
+                setTimeout(function() {
+                    ed = false;
+                }, 30);
+            },
+            whileScrolling:function(el){
+                if (!prev) {
+                    $('.preview').mCustomScrollbar("scrollTo",this.mcs.top*-1,{
+                        scrollEasing:"linear",
+                        timeout: 10,
+                        scrollInertia: 200
+                    });
+                }
+            }
+        }
+    });
+
+    $(".preview").mCustomScrollbar("update");
+    $(".editor").mCustomScrollbar("update");
 }
 
 function loadSettings() {

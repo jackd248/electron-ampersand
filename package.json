@@ -65,6 +65,7 @@
     "markdown-it-highlightjs": "2.0.0",
     "json-storage": "^2.1.1",
     "localStorage": "^1.0.3",
-    "electron-editor-context-menu": "^1.1.1"
+    "electron-editor-context-menu": "^1.1.1",
+    "perfect-scrollbar": "0.6.12"
   }
 }
