@@ -244,10 +244,25 @@ html, body
     color: @lightGray;
     font-family: Hack, monospace;
     word-wrap: break-word;
+    z-index: 2;
 
     .CodeMirror-cursor {
       border-left: 2px solid @lightBlue;
     }
+  }
+
+  .hint {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    text-align: center;
+    z-index: 0;
+    color: #444444;
+  }
+  .mCSB_container {
+    min-height: 100%;
   }
 }
 
@@ -295,6 +310,30 @@ html, body
     .header, .footer {
       display: none;
     }
+  }
+
+  .hint {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    text-align: center;
+    z-index: 0;
+    color: #CCCCCC;
+    font-size: 16px;
+    box-sizing: border-box;
+    padding: 0 40px;
+
+    span {
+      width: 100%;
+      display: block;
+      text-align: right;
+      font-weight: bold;
+    }
+  }
+  .mCSB_container {
+    min-height: 100%;
   }
 
   blockquote {

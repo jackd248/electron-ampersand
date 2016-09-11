@@ -9,7 +9,7 @@ var BrowserWindow = remote.BrowserWindow;
 var localStorage = require('localStorage');
 var JsonStorage = require('json-storage').JsonStorage;
 var $ = require('jquery');
-require('malihu-custom-scrollbar-plugin')($);
+var Ps = require('perfect-scrollbar');
 var store = JsonStorage.create(localStorage, 'markdown-ampersand', { stringify: true });
 var md = require('markdown-it')({
     html:         true,        // Enable HTML tags in source
@@ -86,6 +86,13 @@ window.onload = function ()
         } else {
             hideSaveIndicator();
         }
+        if (editor.getValue() == '') {
+            document.querySelector('.editor .hint').classList.remove('hidden');
+            document.querySelector('.preview .hint').classList.remove('hidden');
+        } else {
+            document.querySelector('.editor .hint').classList.add('hidden');
+            document.querySelector('.preview .hint').classList.add('hidden');
+        }
     });
 
     loadSettings();
@@ -104,57 +111,7 @@ function loadEventListener() {
         }
     });
 
-    var prev = false;
-    var ed = false;
-
-    $(".preview").mCustomScrollbar({
-        theme:"minimal-dark",
-        // callbacks:{
-        //     onScrollStart: function(){
-        //         prev = true;
-        //     },
-        //     onScroll: function() {
-        //         setTimeout(function() {
-        //             prev = false;
-        //         }, 30);
-        //     },
-        //     whileScrolling:function(el){
-        //         if (!ed) {
-        //             $('.editor').mCustomScrollbar("scrollTo",this.mcs.top*-1,{
-        //                 scrollEasing:"linear",
-        //                 timeout: 10,
-        //                 scrollInertia: 200
-        //             });
-        //         }
-        //     }
-        // }
-    });
-
-    $(".editor").mCustomScrollbar({
-        theme:"minimal-dark",
-        callbacks:{
-            onScrollStart: function(){
-                ed = true;
-            },
-            onScroll: function() {
-                setTimeout(function() {
-                    ed = false;
-                }, 30);
-            },
-            whileScrolling:function(el){
-                if (!prev) {
-                    $('.preview').mCustomScrollbar("scrollTo",this.mcs.top*-1,{
-                        scrollEasing:"linear",
-                        timeout: 10,
-                        scrollInertia: 200
-                    });
-                }
-            }
-        }
-    });
-
-    $(".preview").mCustomScrollbar("update");
-    $(".editor").mCustomScrollbar("update");
+    syncScrollbars();
 }
 
 function loadSettings() {
@@ -219,5 +176,6 @@ function loadSettings() {
 function markdownToHtml(markdown) {
     var html = md.render( markdown );
     document.getElementById("html").innerHTML = html;
+    tableStyling();
     document.querySelector('.word-count').innerHTML = wordCount(markdown);
 }

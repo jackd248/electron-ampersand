@@ -46,7 +46,7 @@ function wordCount(str) {
     if (str == null) {
         return 0;
     }
-    return str.split(" ").length;
+    return str.split(" ").length - 1;
 }
 
 function updateWindowTitle(filename) {
@@ -119,6 +119,28 @@ function addRecentFile(filename) {
     store.set('recentFiles', array);
 }
 
+function syncScrollbars() {
+
+    Ps.initialize(document.querySelector('.preview'), {
+        wheelPropagation: true,
+        minScrollbarLength: 20
+    });
+
+    Ps.initialize(document.querySelector('.editor .content'), {
+        wheelPropagation: true,
+        minScrollbarLength: 20
+    });
+
+    var $divs = $('.preview, .editor');
+    var sync = function(e){
+        var $other = $divs.not(this).off('scroll'), other = $other.get(0);
+        var percentage = this.scrollTop / (this.scrollHeight - this.offsetHeight);
+        other.scrollTop = percentage * (other.scrollHeight - other.offsetHeight);
+        setTimeout( function(){ $other.on('scroll', sync ); },10);
+    };
+    $divs.on('scroll', sync);
+}
+
 function setOption(option, value) {
     store.set(option, value);
 }
@@ -149,14 +171,22 @@ function print() {
 // Generations and clean state of CodeMirror
 var getGeneration = function () {
     return this.editor.doc.changeGeneration();
-}
+};
 
 var setClean = function () {
     this.latestGeneration = this.getGeneration();
-}
+};
 
 var isClean = function () {
     return this.editor.doc.isClean(this.latestGeneration);
+};
+
+function tableStyling() {
+    var tables = document.querySelectorAll("#html table");
+    for (var i = 0; i < tables.length; i++) {
+        tables[i].classList.add('table');
+        tables[i].classList.add('table-striped');
+    }
 }
 
 function newCodeMirrorInstance(value) {
@@ -173,7 +203,20 @@ function newCodeMirrorInstance(value) {
 
     editor.on("change", function() {
         markdownToHtml(editor.getValue());
+        if (savedContent != editor.getValue()) {
+            showSaveIndicator();
+        } else {
+            hideSaveIndicator();
+        }
+        if (editor.getValue() == '') {
+            document.querySelector('.editor .hint').classList.remove('hidden');
+            document.querySelector('.preview .hint').classList.remove('hidden');
+        } else {
+            document.querySelector('.editor .hint').classList.add('hidden');
+            document.querySelector('.preview .hint').classList.add('hidden');
+        }
     });
+
     if (value) {
         editor.getDoc().setValue(value);
     }
